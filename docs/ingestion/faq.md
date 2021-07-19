@@ -41,6 +41,8 @@ Depending on what `druid.storage.type` is set to, Druid will upload segments to 
 
 ## My stream ingest is not handing segments off
 
+You may see a message like `Still waiting for Handoff for Segments` in your logs.
+
 First, make sure there are no exceptions in the logs of the ingestion process. Also make sure that `druid.storage.type` is set to a deep storage that isn't `local` if you are running a distributed cluster.
 
 Other common reasons that hand-off fails are as follows:
