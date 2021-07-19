@@ -66,6 +66,7 @@ It allows Druid to maintain a low-eviction-rate cache for segments that do not c
 
 Per-segment cached results also have the potential to be merged into the results of later queries where there is a similar basic shape (filters, aggregations, etc.) yet cover a different period of time, for example.
 
+Per-segment caching is controlled by the parameters `useCache` and `populateCache`.
 
 > **Use per-segment caching with real-time data**
 >
@@ -74,6 +75,8 @@ Per-segment cached results also have the potential to be merged into the results
 ### Whole-query caching
 
 Here, entire results of individual queries are cached, meaning Druid no longer needs to merge the per-segment results on the Broker.
+
+Whole-query caching is controlled by the parameters `useResultLevelCache` and `populateResultLevelCache` and runtime properties `druid.broker.cache.*`.
 
 > **Use whole-query caching when segments are stable and you are not using real-time ingestion**
 >
