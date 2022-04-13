@@ -113,6 +113,12 @@ const siteConfig = {
     },
   },
 
+  markdownPlugins: [
+    (md) => {
+      require('remarkable-plantuml')(md, {base_path: './static'});
+    }
+  ]
+
   // Show documentation's last contributor's name.
   // enableUpdateBy: true,
 
