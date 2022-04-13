@@ -53,6 +53,39 @@ You can view services in the **Services** tab in the Druid console:
 
 Druid services can be deployed any way you like, but for ease of deployment we suggest organizing them into three server types: Master, Query, and Data.
 
+```uml
+  node query {
+    [broker]
+    [router]
+    }
+
+  note top of query
+    Handles queries from
+    external clients
+    end note
+
+  node master {
+    [coordinator]
+    [overlord]
+    }
+
+  note top of master
+    Manages data availability
+    and ingestion
+    end note
+
+  node data {
+    [historical]
+    [middlemanager]
+    }
+
+  note top of data
+    Executes ingestion workloads
+    and stores all queryable data.
+    end note
+```
+
+
 * **Master**: Runs Coordinator and Overlord processes, manages data availability and ingestion.
 * **Query**: Runs Broker and optional Router processes, handles queries from external clients.
 * **Data**: Runs Historical and MiddleManager processes, executes ingestion workloads and stores all queryable data.
@@ -63,6 +96,33 @@ For more details on process and server organization, please see [Druid Processes
 
 In addition to its built-in process types, Druid also has three external dependencies. These are intended to be able to
 leverage existing infrastructure, where present.
+
+```uml
+
+  component mddb as "metadata storage"
+
+  note bottom of mddb
+    holds various shared system metadata
+    such as segment usage information
+    and task information
+    end note
+
+  component zookeeper
+
+  note bottom of zookeeper
+    internal service discovery,
+    coordination, and leader election
+    end note
+
+  component ds as "Deep Storage"
+
+  note bottom of ds
+    stores any data that has been
+    ingested into the system
+    end note
+
+```
+
 
 ### Deep storage
 
