@@ -43,7 +43,7 @@ package external {
   database mddb as "metadata database"
   component zookeeper
 
-  mddb <..> coordinator : "segment data"
+  mddb ..> coordinator : "segment data"
   zookeeper <..> coordinator : "load / drop instructions"
   }
 ```
