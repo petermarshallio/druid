@@ -22,7 +22,6 @@ title: "Coordinator Process"
   ~ under the License.
   -->
 
-
 ### Configuration
 
 For Apache Druid Coordinator Process Configuration, see [Coordinator Configuration](../configuration/index.md#coordinator).
@@ -32,6 +31,22 @@ For Apache Druid Coordinator Process Configuration, see [Coordinator Configurati
 For a list of API endpoints supported by the Coordinator, see [Coordinator API](../operations/api-reference.md#coordinator).
 
 ### Overview
+
+```uml
+package druid {
+  node master {
+    [coordinator]
+    }
+  }
+
+package external {
+  database mddb as "metadata database"
+  component zookeeper
+
+  mddb <..> coordinator : "segment data"
+  zookeeper <..> coordinator : "load / drop instructions"
+  }
+```
 
 The Druid Coordinator process is primarily responsible for segment management and distribution. More specifically, the
 Druid Coordinator process communicates to Historical processes to load or drop segments based on configurations. The
