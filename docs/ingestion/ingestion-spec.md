@@ -144,6 +144,41 @@ An example `dataSchema` is:
 }
 ```
 
+The example `dataSchema` can be visualised as follows:
+
+```uml
+@startjson
+{
+  "dataSchema": {
+    "dataSource": "wikipedia",
+    "timestampSpec": {
+      "column": "timestamp",
+      "format": "auto"
+    },
+    "dimensionsSpec": {
+      "dimensions": [
+        "page",
+        "language",
+        { "type": "long", "name": "userId" }
+      ]
+    },
+    "metricsSpec": [
+      { "type": "count", "name": "count" },
+      { "type": "doubleSum", "name": "bytes_added_sum", "fieldName": "bytes_added" },
+      { "type": "doubleSum", "name": "bytes_deleted_sum", "fieldName": "bytes_deleted" }
+    ],
+    "granularitySpec": {
+      "segmentGranularity": "day",
+      "queryGranularity": "none",
+      "intervals": [
+        "2013-08-31/2013-09-01"
+      ]
+    }
+  }
+}
+@endjson
+```
+
 ### `dataSource`
 
 The `dataSource` is located in `dataSchema` → `dataSource` and is simply the name of the
@@ -206,6 +241,24 @@ configuring [dimensions](./data-model.md#dimensions). An example `dimensionsSpec
 > your ingestion spec.
 
 A `dimensionsSpec` can have the following components:
+
+```uml
+@startjson
+{
+  "dimensionsSpec": {
+    "dimensions": {
+      "type": "string",
+      "name": "",
+      "createBitmapIndex": "true",
+      "multiValueHandling": "sorted_array"
+    },
+    "dimensionExclusions": [],
+    "spatialDimensions": [],
+    "includeAllDimensions": "false"
+  }
+}
+@endjson
+```
 
 | Field                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Default |
 |------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
